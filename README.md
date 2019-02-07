@@ -12,30 +12,30 @@
 
 # Turning Point (2018 - 2019)
 ### T-Pose : Y12 - 47618A  
-[Team folder here](Turning Point/T-Pose)
+[Team folder here](Turning%20Point/T-Pose)
 
 ### Thomas and Friends : Y13 - 47618B  
 
 ### Tracer : Y11 - 47618C  
-[Team folder here](Turning Point/Tracer)
+[Team folder here](Turning%20Point/Tracer)
 
 ### Thinn : Y10 - 47618D
-[Team folder here](Turning Point/Thinn)
+[Team folder here](Turning%20Point/Thinn)
 
 
 
 ## In The Zone (2017 - 2018)
 ### Sam : Y13 - 47618A
-[Team folder here](In The Zone/Sam)
+[Team folder here](In%20The%20Zone/Sam)
 
 ### Sessel : Y12 - 47618B
-[Team folder here](In The Zone/Sessel)
+[Team folder here](In%20The%20Zone/Sessel)
 
 ### Sebastien : Y10A - 47618C
-[Team folder here](In The Zone/Sebastien)
+[Team folder here](In%20The%20Zone/Sebastien)
 
 ### Senpai : Y10B/11 - 47618D
-[Team folder here](In The Zone/Senpai)
+[Team folder here](In%20The%20Zone/Senpai)
 
 ### Contributors
 - [Daniel Dixon - @Daniel-Dixon-UTC](https://github.com/Daniel-Dixon-UTC)
