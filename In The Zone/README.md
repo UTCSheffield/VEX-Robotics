@@ -1,43 +1,36 @@
-# VEX Robotics @ UTC OLP
+# VEX Robotics
 ![Logo](http://olp.utcsheffield.org.uk/images/utc-sheffield-olp.png "Logo")
 
 * __Contents__
   - What is VEX?
-
+  - __Teams__
+    + [__47618A__ - Y13 - Sam](#sam)
+    + [__47618B__ - Y12 - Sessel](#sessel)
+    + [__47618C__ - Y10A - Sebastien](#sebastien)
+    + [__47618D__ - Y10B/11 - Senpai](#senpai)
+  - [__Contributors__](#contributors)
 
 ## What is VEX?
 [VEX Robotics](https://www.vexrobotics.com) is a company that produces robotics kits similar to [*LEGO® Mindstorms*](https://www.lego.com/en-gb/mindstorms). They are made to be used in competitions across the globe. There are 2 versions: *VEX IQ* and *VEX EDR*. We primarily use EDR, as this is the variant made for older students. There are, of course, other variants than just IQ or EDR, such as *VEXPro*.
 *For more information on VEX EDR, visit https://vexrobotics.com/vexedr .*
 
+## Sam
+### Y13 - 47618A
+[Team folder here](https://github.com/UTCSheffield/VEX-Robotics/tree/master/Sam)
 
-# Turning Point (2018 - 2019)
-### T-Pose : Y12 - 47618A  
-[Team folder here](Turning Point/T-Pose)
+## Sessel
+### Y12 - 47618B
+[Team folder here](https://github.com/UTCSheffield/VEX-Robotics/tree/master/Sessel)
 
-### Thomas and Friends : Y13 - 47618B  
+## Sebastien
+### Y10A - 47618C
+[Team folder here](https://github.com/UTCSheffield/VEX-Robotics/tree/master/Sebastien)
 
-### Tracer : Y11 - 47618C  
-[Team folder here](Turning Point/Tracer)
+## Senpai
+### Y10B/11 - 47618D
+[Team folder here](https://github.com/UTCSheffield/VEX-Robotics/tree/master/Senpai)
 
-### Thinn : Y10 - 47618D
-[Team folder here](Turning Point/Thinn)
-
-
-
-## In The Zone (2017 - 2018)
-### Sam : Y13 - 47618A
-[Team folder here](In The Zone/Sam)
-
-### Sessel : Y12 - 47618B
-[Team folder here](In The Zone/Sessel)
-
-### Sebastien : Y10A - 47618C
-[Team folder here](In The Zone/Sebastien)
-
-### Senpai : Y10B/11 - 47618D
-[Team folder here](In The Zone/Senpai)
-
-### Contributors
+## Contributors
 - [Daniel Dixon - @Daniel-Dixon-UTC](https://github.com/Daniel-Dixon-UTC)
 - [Thomas Fairey - @tomfairey](https://github.com/tomfairey)
 - [Caitlin Allen - @14allenc](https://github.com/14allenc)
