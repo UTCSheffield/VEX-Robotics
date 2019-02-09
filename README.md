@@ -15,9 +15,10 @@
 [Team folder here](Turning%20Point/T-Pose)
 
 ### Thomas and Friends : Y13 - 47618B  
+[Team repo here](https://github.com/dombarter/choochoochoo) Qualified for UK Nationals
 
 ### Tracer : Y11 - 47618C  
-[Team folder here](Turning%20Point/Tracer)
+[Team folder here](Turning%20Point/Tracer) Qualified for UK Nationals
 
 ### Thinn : Y10 - 47618D
 [Team folder here](Turning%20Point/Thinn)
@@ -26,10 +27,10 @@
 
 ## In The Zone (2017 - 2018)
 ### Sam : Y13 - 47618A
-[Team folder here](In%20The%20Zone/Sam)
+[Team folder here](In%20The%20Zone/Sam) Qualified for UK Nationals
 
 ### Sessel : Y12 - 47618B
-[Team folder here](In%20The%20Zone/Sessel)
+[Team folder here](In%20The%20Zone/Sessel) Qualified for UK Nationals
 
 ### Sebastien : Y10A - 47618C
 [Team folder here](In%20The%20Zone/Sebastien)
