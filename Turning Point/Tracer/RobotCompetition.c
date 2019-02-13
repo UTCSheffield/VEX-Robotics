@@ -125,18 +125,18 @@ void pre_auton()
 
 void turn_right() {
 	int rel = SensorValue(gyro);
-	while (SensorValue(gyro) - rel < 700) {
-		motor[rightF] = 100;
-		motor[leftF] = -100;
+	while (SensorValue(gyro) - rel > -600) {
+		motor[rightF] = -100;
+		motor[leftF] = 100;
 	}
 	motor[rightF] = 0;
 	motor[leftF] = 0;
 }
 void turn_left() {
 	int rel = SensorValue(gyro);
-	while (SensorValue(gyro) - rel > -700) {
-		motor[rightF] = -100;
-		motor[leftF] = 100;
+	while (SensorValue(gyro) - rel < 600) {
+		motor[rightF] = 100;
+		motor[leftF] = -100;
 	}
 	motor[rightF] = 0;
 	motor[leftF] = 0;
@@ -180,33 +180,48 @@ task autonomous()
 	nMotorPIDSpeedCtrl[leftF] = mtrSpeedReg;
 	nMotorPIDSpeedCtrl[arm] = mtrSpeedReg;
 
-	int auto = -1; //0-RL 1-BL 2-RR 3-BR 4-AM
+	setMotorTarget(rightF, 0, 127, false);
+	setMotorTarget(leftF, 0, 127, false);
+	setMotorTarget(arm, 0, 127, false);
+
+	int auto = 0; //0-RL 1-BL 2-RR 3-BR 4-AM
 
 	if(auto == 0) { //Red Left
-		moveMotorTarget(leftF, 650, 100, false);
-		moveMotorTarget(rightF, 650, 100, false);
-		delay(2000);
-		moveMotorTarget(rightF, 1200, 100, false);
-		delay(3000);
-		moveMotorTarget(leftF, -100, 40, false);
-		moveMotorTarget(rightF, -100, 40, false);
 
+		moveMotorTarget(leftF, 2000, 100, false);
+		moveMotorTarget(rightF, 2000, 100, false);
+		setMotorTarget(arm, 300, 50, false);
+		delay(4000);
+		moveMotorTarget(rightF, -750, 100, false);
+		moveMotorTarget(leftF, -750, 100, false);
+		setMotorTarget(arm, 200, 100, false);
 		delay(1000);
-
-		motor[arm] = 80;
+		turn_left();
 		motor[claw] = -127;
-		delay(100);
-		motor[arm] = 20;
-		delay(400);
+
+		delay(3000);
+		//moveMotorTarget(leftF, -100, 40, false);
+		//moveMotorTarget(rightF, -100, 40, false);
 
 		moveMotorTarget(leftF, 500, 100, false);
 		moveMotorTarget(rightF, 500, 100, false);
-		delay(1000);
+		delay(2000);
 		motor[claw] = 127;
-		delay(300);
-		motor[claw] = 50;
+		setMotorTarget(arm, 900, 127, true);
+		//motor[arm] = 80;
+		//motor[claw] = -127;
+		//delay(100);
+		//motor[arm] = 20;
+		//delay(400);
 
-		moveMotorTarget(arm, 900, 127, true);
+		//moveMotorTarget(leftF, 500, 100, false);
+		//moveMotorTarget(rightF, 500, 100, false);
+		delay(1000);
+
+		delay(300);
+		//motor[claw] = 50;
+
+
 		delay(1000);
 		moveMotorTarget(rightF, 500, 100, false);
 		delay(2000);
@@ -215,6 +230,8 @@ task autonomous()
 
 		delay(2000);
 
+		moveMotorTarget(leftF, 300, 100, false);
+
 		//moveMotorTarget(rightF, 3000, 100, false);
 		//delay(4000);
 		//moveMotorTarget(leftF, 2000, 100, false);
@@ -222,15 +239,19 @@ task autonomous()
 	}
 
 	if(auto == 2){ //Red Right
-		moveMotorTarget(leftF, 2000, 100, false);
-		moveMotorTarget(rightF, 2000, 100, false);
-		delay(2000);
-		moveMotorTarget(rightF, 800, 100, false);
+		moveMotorTarget(leftF, 2100, 100, false);
+		moveMotorTarget(rightF, 2100, 100, false);
+		moveMotorTarget(arm, 200, 50, true);
+		delay(4000);
+		moveMotorTarget(rightF, -225, 100, false);
+		moveMotorTarget(leftF, -225, 100, false);
+		moveMotorTarget(arm, 300, 50, true);
 		delay(1000);
-		moveMotorTarget(leftF, 700, 100, false);
-		moveMotorTarget(rightF, 700, 100, false);
+		turn_left();
+
 		delay(2000);
-		moveMotorTarget(leftF, 1100, 100, true);
+		moveMotorTarget(leftF, 1400, 100, false);
+		moveMotorTarget(rightF, 1400, 100, false);
 	}
 }
 
