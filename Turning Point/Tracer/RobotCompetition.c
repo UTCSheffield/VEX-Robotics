@@ -27,6 +27,61 @@
 int cmR;
 int cmL;
 
+void flip() {
+	nMotorPIDSpeedCtrl[arm] = mtrSpeedReg;
+	setMotorTarget(arm, 0, true);
+	while (true) {
+		if(vexRT[Btn7D] == 1) {
+			break;
+		}
+		cmR = SensorValue(sonarR);
+		cmL = SensorValue(sonarL);
+
+		if(cmR > 10) {
+			motor[rightF] = 127;
+			} else {
+			motor[rightF] = 0;
+		}
+		if(cmL > 10) {
+			motor[leftF] = 127;
+			} else {
+			motor[leftF] = 0;
+		}
+		if(cmR < 11 && cmL < 11)
+		{
+			break;
+		}
+	}
+	nMotorPIDSpeedCtrl[arm] = mtrNoReg;
+	while(true) {
+		if(vexRT[Btn7D] == 1) {
+			break;
+		}
+		motor[rightF] = 127;
+		motor[leftF] = 127;
+		motor[arm] = 127;
+		if(getMotorEncoder(arm) >= 500) {
+
+			break;
+		}
+	}
+	int count = 0;
+	while(true) {
+	if(vexRT[Btn7D] == 1) {
+			break;
+		}
+		motor[rightF] = 127;
+		motor[leftF] = 127;
+		delay(1);
+		count = count + 1;
+		if(count > 100) {
+			break;
+		}
+	}
+	setMotorTarget(arm, 0, 127, true);
+	nMotorPIDSpeedCtrl[arm] = mtrNoReg;
+}
+
 void pick_up() {
 	nMotorPIDSpeedCtrl[arm] = mtrSpeedReg;
 	setMotorTarget(arm, 0, true);
@@ -184,7 +239,7 @@ task autonomous()
 	setMotorTarget(leftF, 0, 127, false);
 	setMotorTarget(arm, 0, 127, false);
 
-	int auto = 0; //0-RL 1-BL 2-RR 3-BR 4-AM
+	int auto = 3; //0-RL 1-BL 2-RR 3-BR 4-AM CHANGE
 
 	if(auto == 0) { //Red Left
 
@@ -207,7 +262,7 @@ task autonomous()
 		moveMotorTarget(rightF, 500, 100, false);
 		delay(2000);
 		motor[claw] = 127;
-		setMotorTarget(arm, 900, 127, true);
+		setMotorTarget(arm, 700, 127, true);
 		//motor[arm] = 80;
 		//motor[claw] = -127;
 		//delay(100);
@@ -216,26 +271,42 @@ task autonomous()
 
 		//moveMotorTarget(leftF, 500, 100, false);
 		//moveMotorTarget(rightF, 500, 100, false);
-		delay(1000);
+		//delay(1000);
 
-		delay(300);
+		//delay(300);
 		//motor[claw] = 50;
 
 
-		delay(1000);
-		moveMotorTarget(rightF, 500, 100, false);
-		delay(2000);
-		moveMotorTarget(leftF, 1000, 100, false);
-		moveMotorTarget(rightF, 1000, 100, false);
+		//delay(1000);
+		//moveMotorTarget(rightF, 500, 100, false);
+		//delay(2000);
+		//moveMotorTarget(leftF, 1000, 100, false);
+		//moveMotorTarget(rightF, 1000, 100, false);
 
-		delay(2000);
+		//delay(2000);
 
-		moveMotorTarget(leftF, 300, 100, false);
+		//moveMotorTarget(leftF, 300, 100, false);
 
 		//moveMotorTarget(rightF, 3000, 100, false);
 		//delay(4000);
 		//moveMotorTarget(leftF, 2000, 100, false);
 		//moveMotorTarget(rightF, 2000, 100, false);
+	}
+
+	if(auto == 1){ //Blue Left
+		moveMotorTarget(leftF, 2100, 100, false);
+		moveMotorTarget(rightF, 2100, 100, false);
+		moveMotorTarget(arm, 200, 50, true);
+		delay(4000);
+		moveMotorTarget(rightF, -225, 100, false);
+		moveMotorTarget(leftF, -225, 100, false);
+		moveMotorTarget(arm, 300, 50, true);
+		delay(1000);
+		turn_right();
+
+		delay(2000);
+		moveMotorTarget(leftF, 1400, 100, false);
+		moveMotorTarget(rightF, 1400, 100, false);
 	}
 
 	if(auto == 2){ //Red Right
@@ -253,6 +324,31 @@ task autonomous()
 		moveMotorTarget(leftF, 1400, 100, false);
 		moveMotorTarget(rightF, 1400, 100, false);
 	}
+
+	if(auto ==3) { //Blue Right
+
+		moveMotorTarget(leftF, 2000, 100, false);
+		moveMotorTarget(rightF, 2000, 100, false);
+		setMotorTarget(arm, 300, 50, false);
+		delay(4000);
+		moveMotorTarget(rightF, -750, 100, false);
+		moveMotorTarget(leftF, -750, 100, false);
+		setMotorTarget(arm, 200, 100, false);
+		delay(1000);
+		turn_right();
+		motor[claw] = -127;
+
+		delay(3000);
+		//moveMotorTarget(leftF, -100, 40, false);
+		//moveMotorTarget(rightF, -100, 40, false);
+
+		moveMotorTarget(leftF, 500, 100, false);
+		moveMotorTarget(rightF, 500, 100, false);
+		delay(2000);
+		motor[claw] = 127;
+		setMotorTarget(arm, 700, 127, true);
+	}
+
 }
 
 /*---------------------------------------------------------------------------*/
@@ -335,6 +431,9 @@ task usercontrol()
 		}
 		if(vexRT[Btn7L]== 1) {
 			pick_up();
+		}
+		if(vexRT[Btn7U]== 1) {
+			flip();
 		}
 	}
 }
