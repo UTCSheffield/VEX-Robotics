@@ -1,7 +1,7 @@
 #pragma config(Motor,  port2,           rightFrontMotor, tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port3,           rightBackMotor, tmotorVex393_MC29, openLoop, reversed)
-#pragma config(Motor,  port4,           leftarm,       tmotorVex393_MC29, openLoop)
-#pragma config(Motor,  port5,           rightarm,      tmotorVex393_MC29, openLoop, reversed)
+#pragma config(Motor,  port4,           leftarm,       tmotorVex393_MC29, openLoop, reversed)
+#pragma config(Motor,  port5,           rightarm,      tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port7,           claw,          tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port8,           leftFrontMotor, tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port9,           leftBackMotor, tmotorVex393_MC29, openLoop)
@@ -89,7 +89,7 @@ task usercontrol()
 	// User control code here, inside the loop
 	int joy_x;            // will hold the X value of the analog stick (choices below)
 	int joy_y;            // will hold the Y value of the analog stick (choices below)
-	int joy_c;
+	int joy_arm;
 	int threshold = 10;   // helps to eliminate 'noise' from a joystick that isn't perfectly at (0,0)
 	int leftSpeed = 0 ;
 	int rightSpeed = 0;
@@ -109,7 +109,7 @@ task usercontrol()
 
 		joy_x = vexRT[Ch1];   // This is the RIGHT analog stick.  For LEFT, change 'Ch1' to 'Ch4'.
 		joy_y = vexRT[Ch2];   // This is the RIGHT analog stick.  For LEFT, change 'Ch2' to 'Ch3'.
-		joy_c = vexRT[Ch4];
+		joy_arm = vexRT[Ch3];
 
 		// Forward, and swing turns: (both abs(X) and abs(Y) are above the threshold, and Y is POSITIVE)
 		if((abs(joy_x) > threshold) && (abs(joy_y) > threshold) && (joy_y > 0))
@@ -143,7 +143,7 @@ task usercontrol()
 		motor[rightBackMotor] = rightSpeed;
 
 
-
+    /*
 		if(vexRT[Btn5U] == 1)       	//If button 5U is pressed...
 		{
 			liftSpeed = 127;    	//...raise the arm.
@@ -156,9 +156,20 @@ task usercontrol()
 		{
 			liftSpeed = 0;      	//...stop the arm.
 		}
+    */
 
-		motor[leftarm] = liftSpeed;
-		motor[rightarm] = liftSpeed;
+
+		if(joy_arm > 5 || joy_arm < -5)       	//If button 5U is pressed...
+		{
+			liftSpeed = joy_arm;    	//...raise the arm.
+		}
+		else                      		//Else (neither button is pressed)...
+		{
+			liftSpeed = 0;      	//...stop the arm.
+		}
+
+		motor[leftarm] = joy_arm;
+		motor[rightarm] = joy_arm;
 
 		// Remove this function call once you have "real" code.
 		//UserControlCodePlaceholderForTesting();
