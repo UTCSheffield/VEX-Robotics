@@ -15,10 +15,10 @@
 [Team folder here](Turning%20Point/T-Pose)
 
 ### Thomas and Friends : Y13 - 47618B  
-[Team repo here](https://github.com/dombarter/choochoochoo) Qualified for UK Nationals
+[Team repo here](https://github.com/dombarter/choochoochoo) 2nd @ UK Nationals - Qualified for World Championships
 
 ### Tracer : Y11 - 47618C  
-[Team folder here](Turning%20Point/Tracer) Qualified for UK Nationals
+[Team folder here](Turning%20Point/Tracer) Top half finish at UK Nationals
 
 ### Thinn : Y10 - 47618D
 [Team folder here](Turning%20Point/Thinn)
