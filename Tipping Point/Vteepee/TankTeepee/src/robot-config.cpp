@@ -15,6 +15,9 @@ smartdrive Drivetrain = smartdrive(LeftDriveSmart, RightDriveSmart, DrivetrainGy
 motor ClawMotor = motor(PORT3, ratio18_1, false);
 motor ArmMotor = motor(PORT8, ratio18_1, false);
 controller Controller1 = controller(primary);
+motor forkliftMotorA = motor(PORT4, ratio36_1, false);
+motor forkliftMotorB = motor(PORT5, ratio36_1, false);
+motor_group forklift = motor_group(forkliftMotorA, forkliftMotorB);
 
 // VEXcode generated functions
 // define variable for remote controller enable/disable
