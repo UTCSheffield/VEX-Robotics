@@ -12,11 +12,9 @@ motor LeftDriveSmart = motor(PORT1, ratio18_1, false);
 motor RightDriveSmart = motor(PORT2, ratio18_1, true);
 gyro DrivetrainGyro = gyro(Brain.ThreeWirePort.A);
 smartdrive Drivetrain = smartdrive(LeftDriveSmart, RightDriveSmart, DrivetrainGyro, 319.19, 320, 40, mm, 1);
-motor ClawMotor = motor(PORT3, ratio18_1, false);
-motor ArmMotor = motor(PORT8, ratio18_1, false);
 controller Controller1 = controller(primary);
-motor forkliftMotorA = motor(PORT4, ratio36_1, false);
-motor forkliftMotorB = motor(PORT5, ratio36_1, false);
+motor forkliftMotorA = motor(PORT3, ratio36_1, false);
+motor forkliftMotorB = motor(PORT4, ratio36_1, false);
 motor_group forklift = motor_group(forkliftMotorA, forkliftMotorB);
 
 // VEXcode generated functions

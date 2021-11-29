@@ -4,8 +4,6 @@ extern brain Brain;
 
 // VEXcode devices
 extern smartdrive Drivetrain;
-extern motor ClawMotor;
-extern motor ArmMotor;
 extern controller Controller1;
 extern motor_group forklift;
 
