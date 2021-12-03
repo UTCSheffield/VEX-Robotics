@@ -1,3 +1,17 @@
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Drivetrain           drivetrain    1, 2, A         
+// Controller1          controller                    
+// forklift             motor_group   3, 4            
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Drivetrain           drivetrain    1, 2, A         
+// Controller1          controller                    
+// forklift             motor_group   3, 4            
+// ---- END VEXCODE CONFIGURED DEVICES ----
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
@@ -23,46 +37,21 @@
 #include "vex.h"
 
 using namespace vex;
-
+int forklift_positions[3] = {0, 30, 60};
+int forklift_position = 0;
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
-
-  // Deadband stops the motors when Axis values are close to zero.
-  int deadband = 5;
-
-  while (true) {
-    // Get the velocity percentage of the left motor. (Axis3 + Axis1)
-    int forwardSpeed =
-        Controller1.Axis3.position() + Controller1.Axis1.position();
-    // Get the velocity percentage of the right motor. (Axis3 - Axis1)
-    int turnSpeed =
-        Controller1.Axis3.position() - Controller1.Axis1.position();
-
-    // Set the speed of the left motor. If the value is less than the deadband,
-    // set it to zero.
-    if (abs(forwardSpeed) < deadband) {
-      // Set the speed to zero.
-      //Drivetrain.     Velocity(0, percent);
-    } else {
-      // Set the speed to forwardSpeed
-      //LeftMotor.setVelocity(forwardSpeed, percent);
-    }
-
-    // Set the speed of the right motor. If the value is less than the deadband,
-    // set it to zero.
-    if (abs(turnSpeed) < deadband) {
-      // Set the speed to zero
-      //RightMotor.setVelocity(0, percent);
-    } else {
-      // Set the speed to turnSpeed
-      //RightMotor.setVelocity(turnSpeed, percent);
-    }
-
+  forklift.setPosition(forklift_positions[forklift_position],degrees);
+  while(true) {
     // Spin both motors in the forward direction.
     //LeftMotor.spin(forward);
     //RightMotor.spin(forward);
-
+    if (Controller1.ButtonR2.pressing()) {
+      forklift_position ++ ;
+      forklift.setPosition(forklift_positions[forklift_position % 3],degrees);
+    }
     wait(25, msec);
   }
 }
+

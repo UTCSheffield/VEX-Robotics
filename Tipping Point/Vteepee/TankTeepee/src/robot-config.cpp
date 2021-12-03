@@ -21,6 +21,7 @@ motor_group forklift = motor_group(forkliftMotorA, forkliftMotorB);
 // define variable for remote controller enable/disable
 bool RemoteControlCodeEnabled = true;
 // define variables used for controlling motors based on controller inputs
+bool Controller1RightShoulderControlMotorsStopped = true;
 bool DrivetrainNeedsToBeStopped_Controller1 = true;
 
 // define a task that will handle monitoring inputs from Controller1
@@ -59,6 +60,18 @@ int rc_auto_loop_function_Controller1() {
       if (DrivetrainNeedsToBeStopped_Controller1) {
         RightDriveSmart.setVelocity(drivetrainRightSideSpeed, percent);
         RightDriveSmart.spin(forward);
+      }
+      // check the ButtonR1/ButtonR2 status to control forklift
+      if (Controller1.ButtonR1.pressing()) {
+        forklift.spin(forward);
+        Controller1RightShoulderControlMotorsStopped = false;
+      } else if (Controller1.ButtonR2.pressing()) {
+        forklift.spin(reverse);
+        Controller1RightShoulderControlMotorsStopped = false;
+      } else if (!Controller1RightShoulderControlMotorsStopped) {
+        forklift.stop();
+        // set the toggle so that we don't constantly tell the motor to stop when the buttons are released
+        Controller1RightShoulderControlMotorsStopped = true;
       }
     }
     // wait before repeating the process
