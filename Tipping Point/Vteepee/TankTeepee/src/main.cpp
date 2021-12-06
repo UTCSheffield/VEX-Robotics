@@ -12,6 +12,20 @@
 // Controller1          controller                    
 // forklift             motor_group   3, 4            
 // ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Drivetrain           drivetrain    1, 2, A         
+// Controller1          controller                    
+// forklift             motor_group   3, 4            
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Drivetrain           drivetrain    1, 2, A         
+// Controller1          controller                    
+// forklift             motor_group   3, 4            
+// ---- END VEXCODE CONFIGURED DEVICES ----
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
@@ -37,12 +51,15 @@
 #include "vex.h"
 
 using namespace vex;
-int forklift_positions[3] = {0, 30, 60};
+int forklift_positions[3] = {0, 10, 20};
 int forklift_position = 0;
+int forklift_motor_degrees(int forklift_degrees) {
+  return 3 * forklift_degrees;
+}
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
-  forklift.setPosition(forklift_positions[forklift_position],degrees);
+  forklift.setPosition(forklift_motor_degrees(forklift_positions[forklift_position]),degrees);
   while(true) {
     // Spin both motors in the forward direction.
     //LeftMotor.spin(forward);
