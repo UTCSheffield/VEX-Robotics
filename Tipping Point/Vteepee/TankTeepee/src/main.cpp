@@ -56,6 +56,22 @@ int forklift_position = 0;
 int forklift_motor_degrees(int forklift_degrees) {
   return 3 * forklift_degrees;
 }
+// autonomous functions!s
+void autonomousleft() {
+  Drivetrain.turn(left);
+};
+void autonomousright() {
+  Drivetrain.turn(right);
+};
+void autonomousreverse() {
+  Drivetrain.drive(reverse);
+}
+void autonomousforward() {
+  Drivetrain.drive(forward);
+};
+void autonomousstop() {
+  Drivetrain.stop();
+};
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
@@ -64,6 +80,7 @@ int main() {
     // Spin both motors in the forward direction.
     //LeftMotor.spin(forward);
     //RightMotor.spin(forward);
+    // FORKLIFT
     if (Controller1.ButtonR2.pressing()) {
       forklift_position ++ ;
       forklift.setPosition(forklift_positions[forklift_position % 3],degrees);
