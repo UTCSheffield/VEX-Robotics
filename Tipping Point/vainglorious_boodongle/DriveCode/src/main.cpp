@@ -18,11 +18,21 @@
 
 #include "vex.h"
 
+
 using namespace vex;
 
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
+
+  extern float SpeedMult;
   
-  
+  while(true){
+    if(Controller1.ButtonX.pressing()){
+    SpeedMult = 0.1f;
+    }
+    else{
+      SpeedMult = 1.0f;
+    }
+  }
 }
