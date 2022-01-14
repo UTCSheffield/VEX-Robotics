@@ -34,6 +34,36 @@ void autonomousforward() {
 void autonomousstop() {
   Drivetrain.stop();
 };
+void autonomous_forklift_down() {
+  forklift_position ++ ;
+  if(forklift_position < 0){
+    forklift_position = 0;
+  }
+  if(forklift_position >= forklift_positions_length) {
+    forklift_position = forklift_positions_length -1;
+  }
+  Brain.Screen.print("ButtonR2 pos %d", forklift_position);     
+  int motorRotation = forklift_motor_degrees(forklift_position);
+  Brain.Screen.print("motorRotation %d", motorRotation);
+  Brain.Screen.newLine(); 
+        
+  forklift.spinToPosition(motorRotation ,deg);
+};
+void autonomous_forklift_up() {
+  forklift_position -- ;
+  if(forklift_position < 0){
+    forklift_position = 0;
+  }
+  if(forklift_position >= forklift_positions_length) {
+    forklift_position = forklift_positions_length -1;
+  }
+  Brain.Screen.print("ButtonR1 pos %d", forklift_position);     
+  int motorRotation = forklift_motor_degrees(forklift_position);
+  Brain.Screen.print(" motorRotation %d", motorRotation);
+  Brain.Screen.newLine(); 
+
+  forklift.spinToPosition(motorRotation ,deg);
+}
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
