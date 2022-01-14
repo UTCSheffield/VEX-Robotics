@@ -19,6 +19,8 @@ motor MotorGroupForkMotorB = motor(PORT6, ratio36_1, false);
 motor_group MotorGroupFork = motor_group(MotorGroupForkMotorA, MotorGroupForkMotorB);
 controller Controller1 = controller(primary);
 
+
+
 // VEXcode generated functions
 // define variable for remote controller enable/disable
 bool RemoteControlCodeEnabled = true;
@@ -28,8 +30,11 @@ bool Controller1RightShoulderControlMotorsStopped = true;
 bool DrivetrainLNeedsToBeStopped_Controller1 = true;
 bool DrivetrainRNeedsToBeStopped_Controller1 = true;
 
+extern float SpeedMult;
+
 // define a task that will handle monitoring inputs from Controller1
 int rc_auto_loop_function_Controller1() {
+  
   // process the controller input every 20 milliseconds
   // update the motors based on the input values
   while(true) {
@@ -37,8 +42,8 @@ int rc_auto_loop_function_Controller1() {
       // calculate the drivetrain motor velocities from the controller joystick axies
       // left = Axis3 + Axis1
       // right = Axis3 - Axis1
-      int drivetrainLeftSideSpeed = Controller1.Axis3.position() + Controller1.Axis1.position();
-      int drivetrainRightSideSpeed = Controller1.Axis3.position() - Controller1.Axis1.position();
+      int drivetrainLeftSideSpeed = SpeedMult*(Controller1.Axis3.position() + Controller1.Axis1.position());
+      int drivetrainRightSideSpeed = SpeedMult*(Controller1.Axis3.position() - Controller1.Axis1.position());
       
       // check if the value is inside of the deadband range
       if (drivetrainLeftSideSpeed < 5 && drivetrainLeftSideSpeed > -5) {
@@ -85,7 +90,8 @@ int rc_auto_loop_function_Controller1() {
         MotorGroupFork.spin(reverse);
         Controller1LeftShoulderControlMotorsStopped = false;
       } else if (!Controller1LeftShoulderControlMotorsStopped) {
-        MotorGroupFork.stop();
+        MotorGroupFork.stop(hold);
+        
         // set the toggle so that we don't constantly tell the motor to stop when the buttons are released
         Controller1LeftShoulderControlMotorsStopped = true;
       }
@@ -97,7 +103,7 @@ int rc_auto_loop_function_Controller1() {
         MotorGroupArm.spin(reverse);
         Controller1RightShoulderControlMotorsStopped = false;
       } else if (!Controller1RightShoulderControlMotorsStopped) {
-        MotorGroupArm.stop();
+        MotorGroupArm.stop(hold);
         // set the toggle so that we don't constantly tell the motor to stop when the buttons are released
         Controller1RightShoulderControlMotorsStopped = true;
       }
