@@ -19,19 +19,19 @@ int forklift_motor_degrees(int pos) {
 }
 
 // autonomous functions!s
-void autonomousleft() {
+void autonomous_left() {
   Drivetrain.turn(left);
 };
-void autonomousright() {
+void autonomous_right() {
   Drivetrain.turn(right);
 };
-void autonomousreverse() {
+void autonomous_reverse() {
   Drivetrain.drive(reverse);
 }
-void autonomousforward() {
+void autonomous_forward() {
   Drivetrain.drive(forward);
 };
-void autonomousstop() {
+void autonomous_stop() {
   Drivetrain.stop();
 };
 void autonomous_forklift_down() {
