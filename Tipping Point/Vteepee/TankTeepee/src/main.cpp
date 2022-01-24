@@ -12,12 +12,10 @@ using namespace vex;
 int forklift_positions[3] = {90, 60, 0};
 int forklift_position = 0;
 int forklift_positions_length = sizeof(forklift_positions)/sizeof(forklift_positions[0]);
-
 int forklift_motor_degrees(int pos) {
   int forklift_degrees = forklift_positions[pos % 3];
   return 1 * forklift_degrees;
 }
-
 // autonomous functions!s
 void autonomous_left() {
   Drivetrain.turn(left);
@@ -70,7 +68,8 @@ int main() {
   forklift.resetPosition();
   forklift.setStopping(hold);
   bool forkliftpressed = false;
-  
+  forklift.setVelocity(25, percent);
+
   //orklift.spinToPosition(forklift_motor_degrees(forklift_positions[forklift_position]),deg);
   while(true) {
     // Spin both motors in the forward direction.
