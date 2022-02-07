@@ -3,19 +3,28 @@
 // [Name]               [Type]        [Port(s)]
 // Drivetrain           drivetrain    1, 2, A         
 // Controller1          controller                    
-// forklift             motor_group   3, 4            
+// LiftUpMotor          motor         3               
+// PickUpMotor          motor         4               
 // ---- END VEXCODE CONFIGURED DEVICES ----
-
 #include "vex.h"
 
 using namespace vex;
-int forklift_positions[3] = {90, 60, 0};
-int forklift_position = 0;
-int forklift_positions_length = sizeof(forklift_positions)/sizeof(forklift_positions[0]);
-int forklift_motor_degrees(int pos) {
-  int forklift_degrees = forklift_positions[pos % 3];
-  return 1 * forklift_degrees;
+bool drive_backwards = true;
+int LiftUpMotor_positions[3] = {0, 45, 0};
+int LiftUpMotor_position = 0;
+int LiftUpMotor_positions_length = sizeof(LiftUpMotor_positions)/sizeof(LiftUpMotor_positions[0]);
+int LiftUpMotor_motor_degrees(int pos) {
+  int LiftUpMotor_degrees = LiftUpMotor_positions[pos % 3];
+  return 1 * LiftUpMotor_degrees;
 }
+int PickUpMotor_positions[3] = {0, 45, 0};
+int PickUpMotor_position = 0;
+int PickUpMotor_positions_length = sizeof(LiftUpMotor_positions)/sizeof(LiftUpMotor_positions[0]);
+int PickUpMotor_motor_degrees(int pos) {
+  int PickUpMotor_degrees = PickUpMotor_positions[pos % 3];
+  return 1 * PickUpMotor_degrees;
+}
+
 // autonomous functions!s
 void autonomous_left() {
   Drivetrain.turn(left);
@@ -32,93 +41,109 @@ void autonomous_forward() {
 void autonomous_stop() {
   Drivetrain.stop();
 };
-void autonomous_forklift_down() {
-  forklift_position ++ ;
-  if(forklift_position < 0){
-    forklift_position = 0;
-  }
-  if(forklift_position >= forklift_positions_length) {
-    forklift_position = forklift_positions_length -1;
-  }
-  Brain.Screen.print("ButtonR2 pos %d", forklift_position);     
-  int motorRotation = forklift_motor_degrees(forklift_position);
-  Brain.Screen.print("motorRotation %d", motorRotation);
-  Brain.Screen.newLine(); 
-        
-  forklift.spinToPosition(motorRotation ,deg);
-};
-void autonomous_forklift_up() {
-  forklift_position -- ;
-  if(forklift_position < 0){
-    forklift_position = 0;
-  }
-  if(forklift_position >= forklift_positions_length) {
-    forklift_position = forklift_positions_length -1;
-  }
-  Brain.Screen.print("ButtonR1 pos %d", forklift_position);     
-  int motorRotation = forklift_motor_degrees(forklift_position);
-  Brain.Screen.print(" motorRotation %d", motorRotation);
-  Brain.Screen.newLine(); 
-
-  forklift.spinToPosition(motorRotation ,deg);
-}
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
-  forklift.resetPosition();
-  forklift.setStopping(hold);
-  bool forkliftpressed = false;
-  forklift.setVelocity(25, percent);
+  LiftUpMotor.resetPosition();
+  LiftUpMotor.setStopping(hold);
+  bool LiftUpMotorpressed = false;
+  LiftUpMotor.setVelocity(25, percent);
+  PickUpMotor.resetPosition();
+  PickUpMotor.setStopping(hold);
+  bool PickUpMotorpressed = false;
+  PickUpMotor.setVelocity(25, percent);
 
-  //orklift.spinToPosition(forklift_motor_degrees(forklift_positions[forklift_position]),deg);
+  //orklift.spinToPosition(LiftUpMotor_motor_degrees(LiftUpMotor_positions[LiftUpMotor_position]),deg);
   while(true) {
     // Spin both motors in the forward direction.
     //LeftMotor.spin(forward);
     //RightMotor.spin(forward);
 
-    // FORKLIFT
+    // LiftUpMotor
     
     if (Controller1.ButtonR1.pressing() || Controller1.ButtonR2.pressing()) {
-      if (forkliftpressed==false && Controller1.ButtonR2.pressing() ) {
-        forkliftpressed = true;
-        forklift_position ++ ;
-        if(forklift_position < 0){
-          forklift_position = 0;
+      if (LiftUpMotorpressed==false && Controller1.ButtonR2.pressing() ) {
+        LiftUpMotorpressed = true;
+        LiftUpMotor_position ++ ;
+        if(LiftUpMotor_position < 0){
+          LiftUpMotor_position = 0;
         }
-        if(forklift_position >= forklift_positions_length) {
-          forklift_position = forklift_positions_length -1;
+        if(LiftUpMotor_position >= LiftUpMotor_positions_length) {
+          LiftUpMotor_position = LiftUpMotor_positions_length -1;
         }
-        Brain.Screen.print("ButtonR2 pos %d", forklift_position);     
-        int motorRotation = forklift_motor_degrees(forklift_position);
+        Brain.Screen.print("ButtonR2 pos %d", LiftUpMotor_position);     
+        int motorRotation = LiftUpMotor_motor_degrees(LiftUpMotor_position);
         Brain.Screen.print("motorRotation %d", motorRotation);
         Brain.Screen.newLine(); 
         
-        forklift.spinToPosition(motorRotation ,deg);
+        LiftUpMotor.spinToPosition(motorRotation ,deg);
         
       }
-      else if (forkliftpressed==false && Controller1.ButtonR1.pressing()) {
-        forkliftpressed = true;
-        forklift_position -- ;
-        if(forklift_position < 0){
-          forklift_position = 0;
+      else if (LiftUpMotorpressed==false && Controller1.ButtonR1.pressing()) {
+        LiftUpMotorpressed = true;
+        LiftUpMotor_position -- ;
+        if(LiftUpMotor_position < 0){
+          LiftUpMotor_position = 0;
         }
-        if(forklift_position >= forklift_positions_length) {
-          forklift_position = forklift_positions_length -1;
+        if(LiftUpMotor_position >= LiftUpMotor_positions_length) {
+          LiftUpMotor_position = LiftUpMotor_positions_length -1;
         }
-        Brain.Screen.print("ButtonR1 pos %d", forklift_position);     
-        int motorRotation = forklift_motor_degrees(forklift_position);
+        Brain.Screen.print("ButtonR1 pos %d", LiftUpMotor_position);     
+        int motorRotation = LiftUpMotor_motor_degrees(LiftUpMotor_position);
         Brain.Screen.print(" motorRotation %d", motorRotation);
         Brain.Screen.newLine(); 
 
-        forklift.spinToPosition(motorRotation ,deg);
+        LiftUpMotor.spinToPosition(motorRotation ,deg);
         
       }
     }
     else
     {
-      forkliftpressed = false;
+      LiftUpMotorpressed = false;
       
     }
+    if (Controller1.ButtonL1.pressing() || Controller1.ButtonR2.pressing()) {
+      if (PickUpMotorpressed==false && Controller1.ButtonR2.pressing() ) {
+        PickUpMotorpressed = true;
+        PickUpMotor_position ++ ;
+        if(PickUpMotor_position < 0){
+          PickUpMotor_position = 0;
+        }
+        if(PickUpMotor_position >= PickUpMotor_positions_length) {
+          PickUpMotor_position = PickUpMotor_positions_length -1;
+        }
+        Brain.Screen.print("ButtonR2 pos %d", PickUpMotor_position);     
+        int motorRotation = PickUpMotor_motor_degrees(PickUpMotor_position);
+        Brain.Screen.print("motorRotation %d", motorRotation);
+        Brain.Screen.newLine(); 
+        
+        PickUpMotor.spinToPosition(motorRotation ,deg);
+        
+      }
+      else if (PickUpMotorpressed==false && Controller1.ButtonL2.pressing()) {
+        PickUpMotorpressed = true;
+        PickUpMotor_position -- ;
+        if(PickUpMotor_position < 0){
+          PickUpMotor_position = 0;
+        }
+        if(PickUpMotor_position >= PickUpMotor_positions_length) {
+          PickUpMotor_position = PickUpMotor_positions_length -1;
+        }
+        Brain.Screen.print("ButtonR1 pos %d", PickUpMotor_position);     
+        int motorRotation = PickUpMotor_motor_degrees(PickUpMotor_position);
+        Brain.Screen.print(" motorRotation %d", motorRotation);
+        Brain.Screen.newLine(); 
+
+        PickUpMotor.spinToPosition(motorRotation ,deg);
+        
+      }
+    }
+    else
+    {
+      PickUpMotorpressed = false;
+      
+    }
+
     wait(25, msec);
   }
 }
