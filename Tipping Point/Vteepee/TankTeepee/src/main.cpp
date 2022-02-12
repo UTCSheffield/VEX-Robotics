@@ -9,7 +9,6 @@
 #include "vex.h"
 
 using namespace vex;
-bool drive_backwards = true;
 int LiftUpMotor_positions[3] = {0, 45, 0};
 int LiftUpMotor_position = 0;
 int LiftUpMotor_positions_length = sizeof(LiftUpMotor_positions)/sizeof(LiftUpMotor_positions[0]);
