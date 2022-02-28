@@ -9,6 +9,7 @@
 #include "vex.h"
 
 using namespace vex;
+bool forklift_modules_hidden = true;
 int LiftUpMotor_positions[3] = {0, 45, 0};
 int LiftUpMotor_position = 0;
 int LiftUpMotor_positions_length = sizeof(LiftUpMotor_positions)/sizeof(LiftUpMotor_positions[0]);
@@ -142,7 +143,22 @@ int main() {
       PickUpMotorpressed = false;
       
     }
-
+    if (Controller1.ButtonUp.pressing()) {
+      if (forklift_modules_hidden == true) {
+        LiftUpMotor.spinToPosition(180, degrees);
+        PickUpMotor.spinToPosition(180, degrees);
+        LiftUpMotor.resetPosition();
+        PickUpMotor.resetPosition();
+        forklift_modules_hidden = false; 
+      }
+      else {
+        LiftUpMotor.spinToPosition(180, degrees);
+        PickUpMotor.spinToPosition(180, degrees);
+        LiftUpMotor.resetPosition();
+        PickUpMotor.resetPosition();
+        forklift_modules_hidden = true;
+      }
+    }
     wait(25, msec);
   }
 }
