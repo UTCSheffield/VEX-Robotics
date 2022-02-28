@@ -10,12 +10,12 @@
 
 using namespace vex;
 bool forklift_modules_hidden = true;
-int LiftUpMotor_positions[3] = {0, 45, 90};
+int LiftUpMotor_positions[3] = {0, 45, 0};
 int LiftUpMotor_position = 0;
 int LiftUpMotor_positions_length = sizeof(LiftUpMotor_positions)/sizeof(LiftUpMotor_positions[0]);
 int LiftUpMotor_motor_degrees(int pos) {
   int LiftUpMotor_degrees = LiftUpMotor_positions[pos % 3];
-  return 1.5 * LiftUpMotor_degrees;
+  return 1 * LiftUpMotor_degrees;
 }
 int PickUpMotor_positions[3] = {0, 45, 0};
 int PickUpMotor_position = 0;
