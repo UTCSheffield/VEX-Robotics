@@ -19,7 +19,7 @@ brain=Brain()
 
 # Robot configuration code
 left_drive_smart = Motor(Ports.PORT1, GearSetting.RATIO_18_1, False)
-right_drive_smart = Motor(Ports.PORT10, GearSetting.RATIO_18_1, True)
+right_drive_smart = Motor(Ports.PORT2, GearSetting.RATIO_18_1, True)
 drivetrain = DriveTrain(left_drive_smart, right_drive_smart, 319.19, 295, 40, MM, 1)
 
 # Begin project code
